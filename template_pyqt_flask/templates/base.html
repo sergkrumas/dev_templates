@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}Entry Point{% endblock %}</title>
+	<link rel="stylesheet" href="/static/main.css" />
+	<script src="/static/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+<div class="App-header">
+	<header class="Header" role="banner">
+		<div class="Header-left">
+			<div class="HeaderButton HeaderButton--menu" role="button">
+				<i class="Icon Icon--menu Icon--sizeSuperLarge"></i>
+			</div>
+
+			<div class="Header-siteLogo">
+				<a class="siteLogo active" href="/">
+					<div class="tle_label">LOGO TEXT</div>
+				</a>
+			</div>
+		</div>
+		<div class="Header-center">
+			<div class="Header-menu">
+				<nav class="Menu" role="navigation">
+
+					{% macro main_menu_item(text, url_path) -%}
+						{% set rp = request.path %}
+						{% set active_class__ = 'Menu-item--active' if rp.startswith(url_path) else '' %}
+						{% set blank = url_path.startswith("http") %}
+						{% if text == "Database" %}
+							{% set active_class__ = 'Menu-item--active' if rp.startswith('/all') or rp.startswith('/entry') else '' %}
+						{% endif %}
+							<div class="Menu-item {{ active_class__ }}">
+								<a class="Menu-link" href="{{ url_path }}" {{ 'target="_blank"' if blank }}>{{ text }}</a>
+							</div>
+					{%- endmacro %}		
+
+						{{ main_menu_item("ПунктМеню1", "/page1") }}
+						{{ main_menu_item("ПунктМеню2", "/page2" ) }}
+						{{ main_menu_item("ПунктМеню3", "/page3" ) }}
+						{{ main_menu_item("ПунктМеню4", "/page4" ) }}
+						{{ main_menu_item("ПунктМеню5", "/page5") }}
+						{{ main_menu_item("ПунктМеню6", "/page6" ) }}
+						{{ main_menu_item("Поиск", "/search" ) }}
+						{{ main_menu_item("ПунктМеню7", "/page7" ) }}
+						{{ main_menu_item("ПунктМеню8", "/page8" ) }}
+						{{ main_menu_item("ПунктМеню0", "/page9") }}
+
+				</nav>
+			</div>
+		</div>
+		<div class="Header-right"> <!-- нужно для выравнивания блока по центру -->
+
+		</div>
+	</header>
+</div>
+
+
+
+
+{% block content %}
+<div>
+	<center>
+		Content
+	</center>
+</div>
+{% endblock %}
+
+
+<script>
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function() {scrollFunction()};
+
+	function scrollFunction() {
+	    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	        document.getElementById("myBtn").style.display = "block";
+	    } else {
+	        document.getElementById("myBtn").style.display = "none";
+	    }
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+	    document.body.scrollTop = 0;
+	    document.documentElement.scrollTop = 0;
+	}
+</script>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Up</button>
+
+
+
+
+
+</body>
+</html>

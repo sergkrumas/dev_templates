@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Search {% endblock %}
+{% block content %}
+
+
+<div class="Page-chronology">
+	<div class="Chronology">
+		<div class="DatedChronology">
+
+<center>
+<br>
+
+<span class="NewsMarker">Search in <b>titles</b>, <b>company</b> names and <b>authors'</b> lists</span>
+<br><br><br>
+<form action="/search" method="GET">
+    <input type="text" name="q" value="{{ query }}" style="border: gainsboro 1px solid; font-size: 30pt; width: 700px; border-radius: 3px; padding: 5px;"/>
+    <input type="submit" value="search" style="font-size: 20pt; border: none; border-radius: 4px; box-shadow: 0px 1px #888888;"/> <br><br>
+</form>
+
+
+</center>
+
+	{% if entries %}
+			Results:{{ count }}
+	{% endif %}
+
+	<br>
+	{% for item in entries %}
+		{% include "entry_short_summary.html" %}
+	{% else %}
+
+	{% if query %}
+		<center>Nothing to show for query</center>
+	{% else %}
+
+	{% endif %}
+
+	{% endfor %}
+
+</div>
+</div>
+</div>
+
+{% endblock %}
